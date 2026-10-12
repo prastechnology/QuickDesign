@@ -1,0 +1,2084 @@
+BUILD A PRODUCTION-READY GLOBAL DESIGN MAKER + CYBER CAFE DESIGN OS
+
+You are a senior product architect, UX designer, frontend/backend engineer, database architect, SEO engineer and security engineer.
+
+Build a production-ready web application that makes professional graphic design extremely simple for people who do not know Canva, Photoshop or CorelDRAW.
+
+1. PRODUCT VISION
+
+The core positioning is:
+
+“Canva for people who don’t know Canva.”
+
+Primary message:
+
+“No design skill. No prompt skill. Just tell us what you want.”
+
+Hindi/Hinglish positioning:
+
+“Bas batao kya banana hai — professional design ready.”
+
+IMPORTANT:
+
+This MVP must NOT use any AI API.
+
+Do NOT integrate:
+
+- Gemini API
+- OpenAI API
+- image-generation APIs
+- AI text-generation APIs
+- AI question/design generation APIs
+
+However, the architecture MUST be AI-ready so that AI can be added later without rebuilding the editor.
+
+The future AI should act as the brain, while the structured editor acts as the hands.
+
+For example, future commands could be:
+
+- “Naam bada kar do”
+- “Photo left kar do”
+- “Isko premium bana do”
+- “Hindi mein kar do”
+- “Background change karo”
+- “Same design ka wedding version bana do”
+
+These future commands should ultimately translate into structured design operations/JSON rather than requiring image regeneration for every simple edit.
+
+---
+
+2. TARGET USERS
+
+Build for a global audience, not only India or UK.
+
+Primary users:
+
+1. Individual users
+2. Students
+3. Small businesses
+4. Shop owners
+5. Freelancers
+6. Social media creators
+7. Cyber cafe operators
+8. Print shop operators
+9. Local service businesses
+10. Schools/coaching centres
+11. Restaurants
+12. Event organizers
+
+GEO STRATEGY
+
+India remains a major local market.
+
+But the product must be designed for global traffic and monetization.
+
+Priority international markets:
+
+Tier 1
+
+- United States
+- Canada
+- United Kingdom
+- Australia
+- Germany
+- Switzerland
+- Netherlands
+- Norway
+- Sweden
+- Denmark
+- Ireland
+- New Zealand
+
+Tier 2
+
+- France
+- Austria
+- Belgium
+- Finland
+- Italy
+- Spain
+- Japan
+- Singapore
+- UAE
+- South Korea
+
+Do NOT hard-code the product around “UK users”.
+
+Use a global GEO architecture.
+
+Admin must be able to target content, advertisements and SEO pages by country/region.
+
+Track GEO-wise:
+
+- visitors
+- signups
+- designs created
+- templates used
+- downloads
+- ad impressions
+- ad clicks
+- revenue
+- conversion rate
+- retention
+
+---
+
+3. CORE USER EXPERIENCE
+
+The ideal journey should be:
+
+Google/Search/SEO
+→ useful landing page
+→ choose template/tool
+→ customize
+→ preview
+→ download
+
+OR
+
+Homepage
+→ Create Your Design
+→ choose design type
+→ choose template
+→ fill simple information
+→ simple editor
+→ download
+
+The experience must be significantly easier than Canva.
+
+Do not create a complicated professional design suite.
+
+---
+
+4. LANDING PAGE
+
+Create a modern, premium, clean landing page.
+
+Hero:
+
+“Design banana nahi aata?”
+
+Subheading:
+
+“Bas batao kya banana hai — professional design ready.”
+
+Primary CTA:
+
+Create Your Design
+
+Secondary CTA:
+
+Try Without Login
+
+Additional messaging:
+
+Made for Cyber Cafes, Print Shops, Small Businesses & Everyone.
+
+Sections:
+
+- Hero
+- Popular Design Categories
+- Trending Templates
+- How It Works
+- For Cyber Cafes
+- For Small Businesses
+- Social Media Designs
+- Festival Designs
+- Birthday/Wedding Designs
+- Why This Is Easier
+- FAQ
+- Strong CTA
+- Footer
+
+Do not make the homepage unnecessarily heavy.
+
+Optimize for low-end Android devices and slow 4G.
+
+---
+
+5. GUEST-FIRST EXPERIENCE
+
+Users must be able to create designs WITHOUT creating an account.
+
+Guest users can:
+
+- browse templates
+- select templates
+- upload photos
+- edit designs
+- preview
+- save temporarily
+- continue editing
+
+LOGIN MUST NOT be required just to start designing.
+
+DOWNLOAD GATE
+
+When a guest clicks Download:
+
+Show a simple Google login gate.
+
+Message:
+
+“Sign in with Google to download and permanently save your design.”
+
+After successful Google login:
+
+1. Create/link user account.
+2. Automatically claim the guest project.
+3. Migrate guest project into the user's account.
+4. Preserve uploaded assets.
+5. Save the design permanently.
+6. Start download.
+
+The user should NOT lose their design during login.
+
+Guest files/projects must have expiration/cleanup rules so abandoned uploads do not create unlimited storage costs.
+
+---
+
+6. AUTHENTICATION
+
+Initial authentication:
+
+Google OAuth ONLY
+
+Do not implement:
+
+- email/password
+- phone OTP
+- password reset system
+
+Architecture must still be provider-agnostic enough to add additional providers later.
+
+User types:
+
+1. Individual User
+2. Cyber Cafe / Business User
+3. Admin
+
+Use secure server-side authorization.
+
+---
+
+7. DATABASE + STORAGE
+
+Recommended architecture:
+
+Database/Auth
+
+Supabase
+
+Use Supabase for:
+
+- Google authentication
+- PostgreSQL database
+- user profiles
+- cyber cafes
+- templates
+- projects
+- structured design JSON
+- customers
+- orders
+- SEO pages
+- blog
+- CMS
+- FAQs
+- ads
+- analytics
+- settings
+- subscription metadata
+- admin users
+- roles
+- permissions
+
+Object Storage
+
+Use Cloudflare R2 for:
+
+- uploaded photos
+- template assets
+- thumbnails
+- generated exports
+- media
+- temporary guest uploads
+
+BUT:
+
+Do not hard-code the application directly to Cloudflare R2.
+
+Create:
+
+"ObjectStorageProvider"
+
+with methods such as:
+
+- upload
+- download
+- delete
+- signed/private URL
+- public asset URL
+- metadata
+- folder/prefix management
+
+This allows another S3-compatible storage provider to be substituted later.
+
+Never expose storage secrets in frontend code.
+
+Database should store file references/metadata rather than unnecessarily storing large binary files.
+
+---
+
+8. SECURITY
+
+Implement security from day one.
+
+Use:
+
+- Supabase Row Level Security
+- server-side authorization
+- role-based access control
+- secure Google OAuth
+- private project access
+- user ownership checks
+- cyber-cafe ownership checks
+- secure customer data handling
+- file type validation
+- file size limits
+- safe image upload processing
+- protected admin routes
+- rate limiting where appropriate
+- secure environment variables
+- no secret/API keys in frontend
+- orphan file cleanup
+- guest upload expiration
+
+User A must NEVER be able to access User B's:
+
+- projects
+- photos
+- customers
+- orders
+- private assets
+
+Cyber Cafe A must NEVER access Cyber Cafe B's customer/project data.
+
+---
+
+9. STRUCTURED DESIGN ENGINE
+
+VERY IMPORTANT:
+
+Do NOT store a design only as a flattened image.
+
+The source of truth must be structured design JSON.
+
+Example concept:
+
+{
+  "canvas": {
+    "width": 1080,
+    "height": 1080,
+    "background": "#ffffff"
+  },
+  "elements": [
+    {
+      "id": "title-1",
+      "type": "text",
+      "text": "Happy Birthday",
+      "x": 100,
+      "y": 100,
+      "width": 800,
+      "height": 100,
+      "fontFamily": "Inter",
+      "fontSize": 64,
+      "fontWeight": 700,
+      "color": "#000000",
+      "alignment": "center"
+    }
+  ]
+}
+
+The JSON is the editable source of truth.
+
+PNG/JPG/PDF exports are outputs generated from the structured design.
+
+---
+
+10. SIMPLE EDITOR
+
+The editor must NOT look like Canva.
+
+Keep it extremely simple.
+
+Main toolbar:
+
+- Text
+- Photo
+- Background
+- Shapes
+- Undo
+- Redo
+- Duplicate
+- Delete
+- Download
+
+Text editing:
+
+- edit text
+- font
+- font size
+- bold
+- italic
+- alignment
+- color
+- letter spacing
+- line spacing
+
+Image editing:
+
+- upload
+- replace
+- crop
+- resize
+- move
+- rotate
+- delete
+
+Background:
+
+- solid color
+- gradient
+- image
+
+Include:
+
+- alignment guides
+- safe areas
+- boundary protection
+- sensible minimum/maximum font sizes
+- locked decorative/background elements where appropriate
+- snapping
+- undo/redo
+- autosave
+- reopen
+- preview
+
+Do not expose unnecessary professional tools.
+
+---
+
+11. DESIGN QUALITY PROTECTION
+
+The product must help beginners create good-looking designs.
+
+Prevent common mistakes:
+
+- text overflowing canvas
+- unreadably small text
+- accidental movement outside canvas
+- poor alignment
+- important content outside safe area
+- distorted images
+- excessive font sizes
+- overlapping critical elements
+
+Use sensible constraints and alignment guides.
+
+The goal is:
+
+Beginner action → professional-looking result.
+
+---
+
+12. TEMPLATE SYSTEM
+
+Templates must be database-driven.
+
+Do NOT hard-code templates into frontend components.
+
+Template fields:
+
+- id
+- name
+- slug
+- category
+- subcategory
+- language
+- thumbnail
+- canvas width
+- canvas height
+- elements
+- fonts
+- colors
+- tags
+- supported formats
+- free/premium
+- featured
+- popularity
+- createdAt
+- updatedAt
+- SEO metadata
+
+When a user selects a template:
+
+Template → New Project
+
+Never directly modify the master template.
+
+Old user projects must remain unchanged if an admin later edits a template.
+
+---
+
+13. SMART TEMPLATE FORMS
+
+Each template should support configurable fields.
+
+Example:
+
+Admin marks fields:
+
+- Name
+- Photo
+- Date
+- Time
+- Phone
+- Address
+- Price
+- Message
+- Business name
+
+The application automatically asks only the fields required by that template.
+
+Example:
+
+Birthday template:
+
+- Name
+- Age
+- Photo
+- Date
+
+Wedding invitation:
+
+- Bride name
+- Groom name
+- Date
+- Time
+- Venue
+
+This makes the experience much easier for beginners and cyber cafes.
+
+---
+
+14. TEMPLATE CATEGORIES
+
+Build categories for:
+
+- Birthday
+- Wedding
+- Anniversary
+- Invitation
+- Greeting
+- Advertisement
+- Business
+- Festival
+- Sale
+- Offer
+- School
+- Coaching
+- Restaurant
+- Real Estate
+- Medical
+- Salon
+- Gym
+- Shop
+- Social Media
+- WhatsApp
+- Resume
+- Certificate
+- Flyer
+- Banner
+- Visiting Card
+
+India-focused:
+
+- Diwali
+- Holi
+- Chhath Puja
+- Raksha Bandhan
+- Janmashtami
+- Durga Puja
+- Saraswati Puja
+- Independence Day
+- Republic Day
+- Teacher's Day
+- Mother's Day
+- Father's Day
+- Business Opening
+- Sale
+- Coaching Admission
+- School Event
+- Restaurant Offer
+- Local Shop Advertisement
+
+International templates should include:
+
+- Christmas
+- Halloween
+- Valentine's Day
+- Baby Shower
+- Wedding
+- Birthday
+- Charity Event
+- Event Flyer
+- Business Promotion
+- Social Media
+- Restaurant
+- Real Estate
+- Local Services
+
+---
+
+15. INITIAL TEMPLATE LIBRARY
+
+Create at least 25 high-quality original demo templates:
+
+- 5 Birthday
+- 5 Business Ads
+- 5 Wedding/Invitation
+- 5 Festival
+- 5 Social Media
+
+Do NOT copy Canva, Adobe, Pinterest or copyrighted designs.
+
+Create original demo designs.
+
+Quality is more important than quantity.
+
+---
+
+16. REMIX / DUPLICATE
+
+Add:
+
+Remix This Design
+
+and
+
+Duplicate
+
+A user should be able to take an existing design and create a new project without modifying the original.
+
+This should become a major engagement feature.
+
+---
+
+17. ONE-CLICK RESIZE
+
+Designs should be future-ready for resizing:
+
+- Instagram Post
+- Instagram Story
+- WhatsApp Status
+- Facebook Post
+- YouTube Thumbnail
+- A4
+- A5
+- Flyer
+- Poster
+- Visiting Card
+- Banner
+
+Build the design engine so element positions can later be intelligently adapted between canvas sizes.
+
+Basic MVP can support only selected predefined sizes.
+
+---
+
+18. EXPORT
+
+MVP:
+
+- PNG
+- JPG
+
+Future:
+
+- PDF
+- print-ready PDF
+- bleed
+- professional print settings
+- CMYK if technically supported
+
+Do NOT make fake DPI/print-ready claims.
+
+Supported dimensions should include:
+
+- A4
+- A3
+- A5
+- visiting card
+- flyer
+- banner
+- custom size
+- 1080x1080
+- 1080x1920
+- 1280x720
+
+---
+
+19. WHATSAPP SHARING
+
+Make architecture future-ready for easy sharing.
+
+Priority future feature:
+
+Share Design on WhatsApp
+
+Especially important for:
+
+- India
+- cyber cafes
+- local businesses
+- invitations
+- social posts
+
+---
+
+20. MY DESIGNS
+
+Users should have:
+
+My Designs
+
+Each project should show:
+
+- thumbnail
+- name
+- category
+- last edited
+- edit
+- duplicate
+- delete
+- download
+
+Include:
+
+- search
+- filters
+- sorting
+
+Cyber Cafe users need fast project retrieval.
+
+---
+
+21. CYBER CAFE MODE
+
+Create a dedicated Cyber Cafe / Print Shop dashboard.
+
+Dashboard sections:
+
+- New Design
+- Quick Create
+- My Designs
+- Customers
+- Orders
+- Print Queue
+- Payments
+- Templates
+- Settings
+
+Desktop optimized but still mobile usable.
+
+---
+
+22. QUICK CREATE
+
+Quick-create jobs:
+
+- Birthday Poster
+- Wedding Invitation
+- Anniversary Card
+- Shop Advertisement
+- Festival Poster
+- Coaching Advertisement
+- School Event Poster
+- Restaurant Offer
+- Visiting Card
+- Certificate
+- Resume
+- Passport Photo Sheet
+- ID Card
+- Flyer
+- Banner
+- Social Media Post
+
+Each workflow should ask only the necessary information.
+
+---
+
+23. CUSTOMER MANAGEMENT
+
+Cyber Cafe users should have:
+
+Customers:
+
+- name
+- phone
+- email if provided
+- address if needed
+- notes
+- project history
+- order history
+
+Do not expose customer information publicly.
+
+---
+
+24. CUSTOMER REQUEST LINK
+
+Future/P1 feature:
+
+Cyber Cafe operator creates a request.
+
+System generates a unique customer link.
+
+Customer can:
+
+- upload photo
+- enter name
+- date
+- phone
+- address
+- message
+- other required fields
+
+Operator receives submission and creates design.
+
+Future workflow:
+
+Draft
+→ Customer Review
+→ Changes Requested
+→ Approved
+→ Ready for Print
+→ Printed
+→ Delivered
+→ Completed
+
+---
+
+25. CYBER CAFE PUBLIC PROFILE
+
+Future-ready public profile:
+
+- business name
+- location
+- phone
+- WhatsApp
+- address
+- hours
+- services
+- order/request link
+
+Future feature:
+
+public storefront/order page.
+
+---
+
+26. ADS MONETIZATION
+
+Ads are a core monetization strategy from day one.
+
+Free users can use the product with ads.
+
+Future Pro users should get a completely ad-free experience.
+
+Do NOT hard-code one ad provider.
+
+Create:
+
+"AdProvider"
+
+abstraction.
+
+It should support future integration with legitimate ad networks/providers.
+
+Supported ad types
+
+Architecture should support:
+
+- banner ads
+- static/poster ads
+- native ads
+- video ads
+- future rewarded video ads
+
+---
+
+27. AD PLACEMENTS
+
+Use non-intrusive placements.
+
+Recommended:
+
+- homepage
+- template gallery
+- category pages
+- SEO landing pages
+- blog/content pages
+- result page
+- download page
+- download gate
+
+Do NOT unnecessarily interrupt active editing.
+
+Do not cover the canvas with intrusive advertisements.
+
+Future rewarded ad example:
+
+“Watch a short ad to unlock this premium export.”
+
+This should be optional, not forced into every workflow.
+
+---
+
+28. GLOBAL AD TARGETING
+
+Admin should be able to target ads by:
+
+- country
+- region
+- language
+- device
+- desktop/mobile
+- free/pro user
+- page placement
+- campaign
+- date range
+
+Priority GEO markets:
+
+US
+Canada
+UK
+Australia
+Germany
+Switzerland
+Netherlands
+Norway
+Sweden
+Denmark
+Ireland
+New Zealand
+France
+Austria
+Belgium
+Finland
+Italy
+Spain
+Japan
+Singapore
+UAE
+South Korea
+India
+
+Do NOT assume a particular country always has higher revenue.
+
+Track actual performance.
+
+---
+
+29. ADMIN ADS MANAGEMENT
+
+Create a dedicated:
+
+Admin → Ads Management
+
+Do NOT put all ad functionality into the main dashboard.
+
+Admin should manage:
+
+- campaigns
+- ad creatives
+- placement
+- country targeting
+- device targeting
+- user targeting
+- active/inactive
+- start date
+- end date
+- priority
+- frequency cap
+- impressions
+- clicks
+- CTR
+- performance
+- estimated revenue if provider data is available
+
+Example placement IDs:
+
+- HOME_TOP
+- TEMPLATE_GALLERY
+- CATEGORY_PAGE
+- EDITOR_BOTTOM
+- DOWNLOAD_GATE
+- RESULT_PAGE
+- BLOG_CONTENT
+- SEO_PAGE
+
+---
+
+30. FUTURE PRO MONETIZATION
+
+Do not implement payment processing in MVP.
+
+But build subscription architecture now.
+
+Future:
+
+Free
+
+- basic templates
+- editor
+- downloads
+- ads
+
+Pro
+
+- ad-free
+- premium templates
+- high-resolution export
+- print features
+- advanced features
+- future AI credits
+- bulk design
+- faster processing
+- brand kits
+
+Database must support subscription metadata so this can be added later without redesigning the system.
+
+---
+
+31. FUTURE REVENUE STREAMS
+
+Architecture should allow:
+
+1. Free users → ads
+2. Pro users → subscription
+3. AI → credits
+4. Cyber Cafe → business subscription
+5. Template marketplace → commission
+6. Future print marketplace → commission
+
+Do not implement all these now.
+
+Only make the architecture extensible.
+
+---
+
+32. pSEO ENGINE
+
+pSEO is a major growth strategy.
+
+Build a real structured pSEO system.
+
+Do NOT generate thousands of thin/spam pages.
+
+Every indexable SEO page must provide useful content, relevant templates/tools and a clear creation workflow.
+
+Examples:
+
+- /birthday-poster-maker
+- /birthday-invitation-maker
+- /anniversary-card-maker
+- /wedding-invitation-maker
+- /business-poster-maker
+- /shop-advertisement-maker
+- /restaurant-menu-maker
+- /resume-maker
+- /certificate-maker
+- /hindi-poster-maker
+- /birthday-poster-maker-in-hindi
+- /poster-maker-for-cyber-cafe
+- /wedding-invitation-maker-india
+- /instagram-post-maker
+- /instagram-story-maker
+- /whatsapp-status-maker
+- /facebook-post-maker
+- /youtube-thumbnail-maker
+
+Birthday combinations can include:
+
+- birthday poster
+- birthday invitation
+- birthday card
+- birthday photo collage
+- birthday Instagram post
+- birthday WhatsApp status
+- birthday banner
+- birthday poster templates
+- birthday invitation templates
+- birthday card templates
+- Hindi birthday poster
+- kids birthday poster
+- boy birthday poster
+- girl birthday poster
+
+Build similar useful clusters for:
+
+- wedding
+- anniversary
+- festivals
+- business
+- restaurant
+- school
+- coaching
+- shop
+- social media
+- local businesses
+
+---
+
+33. pSEO DATA MODEL
+
+SEO pages should be generated from structured entities:
+
+- category
+- use case
+- format
+- language
+- audience
+- business type
+- country
+- occasion
+
+But only create combinations that have genuine user/search value.
+
+Avoid meaningless combinations.
+
+Each page should contain:
+
+- unique title
+- unique meta description
+- useful introduction
+- relevant templates
+- creation CTA
+- related tools
+- related templates
+- FAQ
+- breadcrumbs
+- internal links
+
+---
+
+34. TECHNICAL SEO
+
+Implement:
+
+- dynamic meta title
+- dynamic meta description
+- canonical URL
+- clean slugs
+- Open Graph
+- Twitter/X metadata
+- XML sitemap
+- robots.txt
+- breadcrumbs
+- structured data/schema
+- pagination where appropriate
+- index/noindex controls
+- sitemap controls
+- proper 404 pages
+
+Do not promise Google rankings.
+
+Optimize for search quality and search intent.
+
+---
+
+35. SEO ADMIN PANEL
+
+Create a dedicated:
+
+Admin → SEO / pSEO
+
+Admin should control:
+
+- keyword
+- primary page
+- slug
+- title
+- meta description
+- canonical
+- indexability
+- content
+- FAQ
+- schema
+- featured templates
+- related pages
+- internal links
+- anchor text
+- page priority
+
+---
+
+36. SEO HEALTH DASHBOARD
+
+Show:
+
+- indexed pages
+- noindex pages
+- missing metadata
+- missing canonical
+- duplicate titles
+- duplicate meta descriptions
+- broken internal links
+- orphan pages
+- sitemap status
+- content status
+- SEO errors
+- warnings
+
+Also add basic keyword cannibalization protection.
+
+If multiple pages target essentially the same search intent:
+
+- flag the conflict
+- recommend a primary/canonical page
+- suggest merging, redirecting or differentiating pages
+
+---
+
+37. INTERNAL LINKING
+
+Internal linking is extremely important.
+
+Every important page should lead users somewhere useful.
+
+Example:
+
+Birthday Poster Maker
+→ Birthday Templates
+→ Birthday Invitation Maker
+→ Anniversary Card Maker
+→ Greeting Card Maker
+→ Photo Poster Maker
+→ WhatsApp Birthday Status
+→ Instagram Birthday Post
+
+Include:
+
+- related tools
+- related templates
+- related categories
+- related blog posts
+- related SEO pages
+- creation CTA
+
+Use contextual links inside content.
+
+Add:
+
+Related Designs
+
+with:
+
+- same category
+- similar occasion
+- same format
+- same language
+- related business type
+
+Every important page should have a strong:
+
+Create Your Design
+
+CTA.
+
+Avoid dead-end SEO pages.
+
+---
+
+38. USER JOURNEY / SEO FUNNEL
+
+Optimize for:
+
+Google
+→ pSEO page
+→ template
+→ editor
+→ create
+→ download
+
+OR:
+
+Google
+→ pSEO page
+→ related tool
+→ template
+→ editor
+→ download
+
+OR:
+
+Google
+→ blog/guide
+→ useful tool
+→ template
+→ editor
+→ download
+
+This should improve both SEO engagement and product conversion.
+
+---
+
+39. BLOG / CONTENT CMS
+
+Create a dedicated Admin Blog module.
+
+Admin can manage:
+
+- title
+- slug
+- content
+- featured image
+- FAQ
+- meta title
+- meta description
+- topics
+- schema
+- publish date
+- status
+
+Blog content should internally link to relevant tools/templates.
+
+---
+
+40. OTHER ADMIN MODULES
+
+Do NOT build one giant cluttered admin page.
+
+Create dedicated modules:
+
+1. Dashboard
+2. Users
+3. Cyber Cafes
+4. Templates
+5. Categories
+6. Projects/Designs
+7. Customers
+8. Orders
+9. SEO / pSEO
+10. Blog / Articles
+11. Homepage / CMS
+12. FAQ
+13. Pricing
+14. Media / Assets
+15. Ads / Campaigns
+16. Analytics
+17. Site Settings
+18. Admin Users
+19. Roles & Permissions
+20. Subscriptions architecture
+
+Each module should have appropriate CRUD functionality and permissions.
+
+---
+
+41. ADMIN RBAC
+
+Support:
+
+- Super Admin
+- Content Manager
+- Template Manager
+- SEO Manager
+- Ads Manager
+- Support/Admin Staff
+
+Permissions should be configurable.
+
+Only authorized admins can access sensitive areas.
+
+---
+
+42. ANALYTICS
+
+Track product events:
+
+- template_viewed
+- template_selected
+- design_created
+- design_saved
+- design_downloaded
+- project_reopened
+- project_duplicated
+- customer_created
+- customer_request_created
+- order_created
+
+Track funnel:
+
+Visitor
+→ Template View
+→ Template Selection
+→ Design Creation
+→ Google Login
+→ Download
+
+Track GEO performance.
+
+Track device performance.
+
+Track ads:
+
+- impressions
+- clicks
+- CTR
+- campaign performance
+- GEO performance
+
+Do not collect unnecessary personal information.
+
+---
+
+43. LOCALIZATION
+
+Architecture must support:
+
+- English
+- Hindi
+- Hinglish-ready UI/content
+
+Future:
+
+- Bengali
+- Marathi
+- Tamil
+- Telugu
+- Gujarati
+- Punjabi
+- Kannada
+- Malayalam
+- Odia
+
+Do not hard-code UI strings throughout components.
+
+Use a localization structure.
+
+---
+
+44. PERFORMANCE
+
+Primary devices:
+
+- low-end Android
+- slow 4G
+- 360px mobile width
+
+Optimize:
+
+- fast first load
+- lazy loading
+- thumbnails
+- pagination
+- image compression
+- code splitting
+- debounced autosave
+- efficient canvas rendering
+- minimal unnecessary rerenders
+
+Test responsive layouts at:
+
+- 360px
+- 390px
+- 412px
+- tablet
+- desktop
+
+Cyber Cafe dashboard should be desktop optimized.
+
+---
+
+45. MOBILE UX
+
+Mobile editor must remain usable.
+
+Do not simply shrink desktop UI.
+
+Use:
+
+- bottom sheets
+- compact toolbar
+- large touch targets
+- simple controls
+- easy image upload
+- readable text
+- clear save/download buttons
+
+---
+
+46. AUTOSAVE
+
+Implement autosave for logged-in users.
+
+For guests:
+
+- local/temporary persistence
+- temporary server storage when required
+
+Autosave should be debounced.
+
+Do not create excessive database writes.
+
+Users should be able to close and reopen a project without losing work.
+
+---
+
+47. VERSION / RECOVERY ARCHITECTURE
+
+Future-ready for:
+
+- version history
+- restore previous version
+- undo across sessions
+- design snapshots
+
+MVP must at least protect against accidental data loss.
+
+---
+
+48. FUTURE TEMPLATE MARKETPLACE
+
+Do not implement now.
+
+But architecture should allow future:
+
+Designer uploads template
+→ admin moderation
+→ marketplace
+→ user purchases/uses
+→ creator receives revenue share
+
+This can become a future revenue stream.
+
+---
+
+49. NO-AI MVP RULE
+
+This is critical.
+
+Do NOT secretly call any AI API.
+
+Do NOT add:
+
+- Gemini API key
+- OpenAI API key
+- image generation API
+- AI copy generation
+- AI template generation
+
+The MVP should work completely without AI.
+
+If there is a future “Describe your design” UI element, it must either:
+
+- remain clearly marked as coming soon, OR
+- use a non-AI structured workflow.
+
+Never make a fake AI button appear functional.
+
+---
+
+50. FUTURE AI ARCHITECTURE
+
+Create an interface such as:
+
+"AIProvider"
+
+Future providers could include:
+
+- Gemini
+- OpenAI
+- other providers
+
+But do not implement them now.
+
+Future AI should output structured actions such as:
+
+CHANGE_TEXT
+MOVE_ELEMENT
+RESIZE_ELEMENT
+CHANGE_BACKGROUND
+REPLACE_IMAGE
+CHANGE_COLOR
+DUPLICATE_DESIGN
+RESIZE_CANVAS
+
+The editor executes these actions.
+
+This prevents unnecessary image regeneration and reduces future AI costs.
+
+---
+
+51. DESIGN COMMAND ARCHITECTURE
+
+Future-ready structured operation layer:
+
+DesignCommand
+Operation
+TargetElement
+Parameters
+Validation
+Execution
+Undo
+
+This will allow future AI and human editor actions to use the same editing engine.
+
+---
+
+52. PRINT WORKFLOW
+
+The application should eventually become a lightweight Design + Print Workflow OS for cyber cafes.
+
+Future workflow:
+
+Customer Request
+→ Design
+→ Approval
+→ Print Queue
+→ Payment
+→ Printed
+→ Delivered
+
+Do not overbuild this in MVP, but database architecture should support it.
+
+---
+
+53. SUGGESTED MVP PRIORITY
+
+P0 — MUST WORK
+
+1. Landing page
+2. Google login
+3. Guest creation
+4. Categories
+5. Template gallery
+6. Template preview
+7. Template selection
+8. Structured editor
+9. Text editing
+10. Image editing
+11. Background editing
+12. Undo/redo
+13. Autosave
+14. Save/reopen
+15. PNG/JPG download
+16. Google login download gate
+17. Guest project migration
+18. Responsive mobile UI
+19. Cyber Cafe dashboard
+20. Quick Create
+21. Basic customers
+22. Admin modules
+23. Basic pSEO engine
+24. Internal linking
+25. Ads architecture
+26. Basic analytics
+27. Supabase integration
+28. Object storage abstraction
+29. R2 integration
+30. Security/RLS
+
+---
+
+54. P1
+
+Add later:
+
+- customer request links
+- customer preview/approval
+- print sizes
+- PDF
+- duplicate/version history
+- advanced template management
+- search/filter
+- SEO health dashboard expansion
+- WhatsApp sharing
+- better analytics
+- rewarded ads
+- one-click resize expansion
+
+---
+
+55. P2
+
+Future:
+
+- AI natural-language design creation
+- AI redesign
+- AI copy generation
+- AI image generation
+- brand kits
+- bulk designs
+- team accounts
+- subscriptions/payments
+- AI credits
+- template marketplace
+- print marketplace
+- nearby print-shop discovery
+
+---
+
+56. DATABASE ARCHITECTURE
+
+Design normalized database entities around:
+
+- users
+- profiles
+- auth identities
+- cyber_cafes
+- cyber_cafe_members
+- templates
+- template_fields
+- categories
+- projects
+- project_versions
+- project_assets
+- customers
+- orders
+- order_items
+- print_jobs
+- seo_pages
+- seo_keywords
+- seo_links
+- blog_posts
+- faqs
+- media_assets
+- ad_campaigns
+- ads
+- ad_placements
+- ad_targeting
+- ad_events
+- analytics_events
+- subscription_plans
+- subscriptions
+- admin_users
+- roles
+- permissions
+- site_settings
+
+Use foreign keys and ownership relationships correctly.
+
+Do not create unnecessary complexity where not needed for MVP.
+
+---
+
+57. STORAGE STRUCTURE
+
+Use organized object-storage prefixes such as:
+
+users/{userId}/projects/{projectId}/
+users/{userId}/uploads/
+cybercafes/{cafeId}/
+templates/{templateId}/
+exports/{projectId}/
+guest/{guestId}/
+
+Guest assets must expire if the guest never logs in/claims them.
+
+Add cleanup jobs for orphaned files.
+
+---
+
+58. ERROR HANDLING
+
+Every major operation should have proper:
+
+- loading state
+- empty state
+- error state
+- retry option
+- success feedback
+
+Do not leave users staring at blank screens.
+
+---
+
+59. NO FAKE FEATURES
+
+This is mandatory.
+
+Do not create buttons that look functional but do nothing.
+
+If something is not implemented:
+
+- label it clearly as coming soon, OR
+- hide it until implemented.
+
+Every P0 feature must work end-to-end.
+
+---
+
+60. CODE QUALITY
+
+Use:
+
+- modular architecture
+- reusable components
+- typed interfaces where appropriate
+- clear folder structure
+- environment variables
+- service abstractions
+- reusable UI components
+- separation of frontend/backend concerns
+- database migrations
+- validation
+- error boundaries where appropriate
+
+Avoid giant files and duplicated logic.
+
+---
+
+61. PROVIDER ABSTRACTIONS
+
+Create abstraction layers for future flexibility:
+
+"AuthProvider"
+
+"ObjectStorageProvider"
+
+"AdProvider"
+
+"AIProvider"
+
+"PaymentProvider"
+
+Do not implement unnecessary providers now.
+
+Initial implementations:
+
+Auth → Google/Supabase
+
+Storage → Cloudflare R2
+
+AI → None
+
+Payment → None
+
+Ads → provider-agnostic architecture/configurable integration
+
+---
+
+62. HOMEPAGE CMS
+
+Admin must be able to change:
+
+- hero title
+- hero subtitle
+- CTA text
+- featured categories
+- featured templates
+- promotional sections
+- FAQ
+- footer content
+
+Without modifying source code.
+
+---
+
+63. FAQ
+
+Create dedicated FAQ management.
+
+FAQs should support:
+
+- question
+- answer
+- category/page
+- display order
+- active/inactive
+- SEO/schema usage
+
+---
+
+64. PRODUCT DESIGN PRINCIPLE
+
+Every major product decision should follow:
+
+Simplicity > Feature quantity
+
+The user should never feel:
+
+“Yeh Canva jaisa complicated hai.”
+
+The feeling should be:
+
+“Bas template choose kiya, details dali aur design ban gaya.”
+
+---
+
+65. QUALITY BAR
+
+Before considering the MVP complete, test:
+
+Authentication
+
+- Google login
+- logout
+- session persistence
+
+Guest
+
+- create without login
+- upload photo
+- edit
+- refresh
+- temporary recovery
+- login
+- project migration
+- download
+
+Editor
+
+- text
+- image
+- background
+- undo
+- redo
+- autosave
+- reopen
+- export
+
+Templates
+
+- browse
+- search/filter
+- select
+- create project
+- template remains unchanged
+
+Cyber Cafe
+
+- create customer
+- create project
+- retrieve project
+- order workflow foundation
+
+SEO
+
+- clean URLs
+- metadata
+- canonical
+- sitemap
+- robots
+- schema
+- internal links
+- no duplicate/thin page generation
+
+Ads
+
+- placement architecture
+- targeting structure
+- active/inactive campaigns
+- analytics events
+- no intrusive editor interruption
+
+Security
+
+- RLS
+- authorization
+- private assets
+- protected admin
+- upload validation
+
+Responsive
+
+- 360px
+- 390px
+- 412px
+- tablet
+- desktop
+
+---
+
+66. IMPORTANT PRODUCT PRINCIPLE
+
+Do not build everything at once just because it is mentioned in this specification.
+
+Build in the following order:
+
+1. Foundation
+2. Auth
+3. Guest flow
+4. Template engine
+5. Structured editor
+6. Save/export
+7. Cyber Cafe basics
+8. Admin
+9. SEO/pSEO
+10. Ads
+11. Analytics
+12. Optimization
+
+P1/P2 features must not destabilize P0.
+
+---
+
+67. GITHUB WORKFLOW
+
+When implementation is complete:
+
+- test the application
+- fix build/runtime errors
+- verify major P0 workflows
+- verify database migrations
+- verify environment variable requirements
+- verify responsive UI
+- verify security rules
+
+Then push all working code changes to the connected GitHub repository.
+
+Do NOT expose GitHub tokens, secrets or private environment variables in frontend code.
+
+The repository should contain the latest working version.
+
+---
+
+68. FINAL IMPLEMENTATION RULE
+
+Do not merely create a visual prototype.
+
+Build a real working application with:
+
+- real database
+- real authentication
+- real project persistence
+- real storage
+- real editor state
+- real exports
+- real admin controls
+- real SEO pages
+- real internal linking
+- real security
+- real responsive behavior
+
+Avoid fake/demo-only functionality for P0.
+
+At the end, verify that a real user can complete this entire flow:
+
+Open website → choose template → edit → upload photo → save → Google login → guest project migration → download → reopen later.
+
+Also verify:
+
+Cyber Cafe → customer → quick create → design → save → retrieve.
+
+And:
+
+Google Search → pSEO page → related template → editor → download.
+
+The product should feel like a simple design operating system for ordinary users and cyber cafes, not another complicated Canva clone.
+
+Build for simplicity, scalability, low operating cost, global SEO traffic, ad monetization and future AI integration.
