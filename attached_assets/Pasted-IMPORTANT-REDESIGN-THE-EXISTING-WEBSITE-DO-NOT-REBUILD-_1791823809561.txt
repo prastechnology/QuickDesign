@@ -1,0 +1,793 @@
+IMPORTANT: REDESIGN THE EXISTING WEBSITE — DO NOT REBUILD THE PRODUCT FROM SCRATCH.
+
+First inspect the current application, routes, components, existing functionality and design editor. Preserve all currently working functionality.
+
+CRITICAL BRAND CLARIFICATION:
+“Astra 6” was ONLY a visual/design inspiration/reference I mentioned earlier. It is NOT the product name.
+DO NOT call the website Astra, Astra 6, Astra 6.0, or any variation of Astra.
+Do not invent a new product name.
+Keep the existing product/project brand name already present in the application.
+If the existing brand name is configurable, keep it configurable.
+
+==================================================
+1. MAIN PROBLEM TO FIX
+==================================================
+
+The current landing page looks like a typography/editorial website rather than a professional DESIGN CREATION PLATFORM.
+
+This is a design website, therefore the landing page itself must SHOW DESIGNS.
+
+The visitor should immediately understand within 3–5 seconds:
+
+“Ah, I can create posters, invitations, advertisements, social posts and other designs here without knowing professional design software.”
+
+The new landing page must be highly visual.
+
+DO NOT create a page dominated by large text and empty space.
+
+DO NOT copy Canva's UI or branding.
+
+The product positioning is:
+
+“Canva for people who don't know Canva.”
+
+Core message:
+
+“Just tell us what you want to make — start with a ready design and customize it.”
+
+The experience should feel much simpler than Canva.
+
+==================================================
+2. VISUAL DIRECTION
+==================================================
+
+Use the previous “Astra 6” aesthetic only as loose visual inspiration for:
+
+- premium typography
+- editorial spacing
+- modern layout
+- sophisticated color balance
+- strong visual hierarchy
+
+BUT DO NOT COPY Astra 6.
+AND DO NOT USE ASTRA AS THE BRAND NAME.
+
+The final website should feel like a modern global SaaS/product website for a design platform.
+
+Target users:
+
+- ordinary people with no design skills
+- small businesses
+- shop owners
+- students
+- creators
+- cyber cafe operators
+- print shops
+- social media users
+
+Target markets:
+
+India + United States + Canada + United Kingdom + Australia + Europe + other international markets.
+
+The website should look professional enough for a US/Canada/UK customer, while remaining extremely easy for Indian users.
+
+==================================================
+3. HERO SECTION — MOST IMPORTANT
+==================================================
+
+Completely redesign the hero.
+
+Do NOT make the hero mostly text.
+
+Desktop layout:
+
+LEFT:
+Large headline:
+
+“Designs without the design headache.”
+
+Supporting text:
+
+“Create posters, invitations, business ads, social posts and more — starting from professionally designed templates.”
+
+Primary CTA:
+
+“Create a design”
+
+Secondary CTA:
+
+“Browse templates”
+
+Also show a small trust/benefit line:
+
+“No design skills. No complicated tools. Start free.”
+
+RIGHT:
+Create a large visual design showcase.
+
+This visual area is extremely important.
+
+Show 4–6 beautiful sample designs/cards arranged in a modern overlapping collage.
+
+Examples:
+
+- Birthday poster
+- Wedding invitation
+- Restaurant offer
+- Shop advertisement
+- Instagram post
+- Festival greeting
+
+The cards should have REALISTIC, PROFESSIONAL DESIGN CONTENT.
+
+Do NOT use random unrelated stock photography.
+
+Do NOT use sexualized/bikini/beach images for business templates.
+
+Images must match the design context.
+
+Example:
+Restaurant → food/restaurant imagery
+Wedding → wedding imagery
+Birthday → celebration imagery
+Shop → products/shop imagery
+Fitness → fitness imagery
+Real estate → property imagery
+
+The hero visual should immediately communicate:
+
+“This website actually makes designs.”
+
+Add subtle depth, shadows, rounded corners and slight rotation/overlap where appropriate.
+
+Avoid excessive animation.
+
+==================================================
+4. HERO DESIGN SHOWCASE SHOULD FEEL LIKE A PRODUCT
+==================================================
+
+Instead of a generic stock photo, create a visual composition showing:
+
+Template cards
++
+actual finished designs
++
+small UI hints such as:
+
+“Birthday Poster”
+“Shop Offer”
+“Instagram Post”
+“Wedding Invitation”
+
+Optionally show a small “Edit” or “Customize” indicator.
+
+The user should visually understand the product without reading the entire page.
+
+==================================================
+5. QUICK CREATE SECTION
+==================================================
+
+Immediately below the hero, add:
+
+“What are you making today?”
+
+Show visual category cards.
+
+Examples:
+
+Birthday
+Wedding
+Invitation
+Business Ad
+Shop Poster
+Restaurant
+Festival
+Social Media
+Instagram Post
+WhatsApp Status
+Resume
+Certificate
+
+Each card should have a beautiful thumbnail/design preview.
+
+Do NOT use plain text-only boxes.
+
+Every category card should visually demonstrate the output.
+
+CTA:
+
+“See all templates”
+
+==================================================
+6. TEMPLATE SHOWCASE
+==================================================
+
+Create a large visual section:
+
+“Start with a design you already love.”
+
+Show a responsive grid/masonry-style collection of professional template previews.
+
+Minimum initial showcase:
+
+25 original demo templates.
+
+Categories:
+
+5 Birthday
+5 Business
+5 Wedding / Invitation
+5 Festival
+5 Social Media
+
+The designs must look genuinely usable.
+
+Do NOT use copied Canva/Pinterest/Adobe templates.
+
+Do NOT use low-quality random AI-looking images.
+
+Use original compositions.
+
+Template cards should have:
+
+- thumbnail
+- category
+- template name
+- “Use this design” CTA
+
+On hover/tap:
+
+“Customize”
+
+Templates must visually dominate this section.
+
+==================================================
+7. BEFORE / AFTER EXPLANATION
+==================================================
+
+Add a visual explanation of the product.
+
+Heading:
+
+“From idea to finished design.”
+
+Show a 3-step visual flow:
+
+01 Choose a template
+02 Add your details
+03 Download your design
+
+Each step must contain a visual example.
+
+For example:
+
+Template →
+simple form →
+finished poster
+
+This is much better than explaining the product only through paragraphs.
+
+==================================================
+8. “NO DESIGN SKILLS” SECTION
+==================================================
+
+Create a visually interesting section around:
+
+“No Photoshop.
+No complicated layers.
+No blank-canvas panic.”
+
+Show a simple comparison:
+
+Traditional design workflow:
+
+Blank canvas
+Layers
+Fonts
+Alignment
+Sizing
+Export settings
+
+Our workflow:
+
+Choose
+Fill
+Customize
+Download
+
+Use icons and mini visual examples.
+
+Do NOT attack competitors by name.
+
+==================================================
+9. SIMPLE EDITOR SHOWCASE
+==================================================
+
+Create a product-preview section showing the actual editor interface.
+
+Show a realistic editor mockup containing:
+
+- canvas
+- text
+- image
+- background
+- simple toolbar
+- undo
+- redo
+- download
+
+Headline:
+
+“Simple enough for anyone.”
+
+Supporting text:
+
+“Start with a balanced design. Change the words, photos and colors. The layout does the hard work.”
+
+This section should use the actual existing editor UI/components where possible instead of inventing a fake interface.
+
+==================================================
+10. CYBER CAFE / PRINT SHOP SECTION
+==================================================
+
+This is a major differentiator.
+
+Create a separate section:
+
+“Built for the people who create designs for everyone else.”
+
+Explain:
+
+For cyber cafes, print shops and small design businesses.
+
+Show a visual dashboard mockup containing:
+
+New Design
+Quick Create
+Customers
+Orders
+Print Queue
+My Designs
+
+Include examples:
+
+Birthday poster
+Wedding invitation
+Resume
+Certificate
+Shop advertisement
+Passport photo sheet
+Flyer
+
+CTA:
+
+“Explore Cyber Cafe Mode”
+
+Do not make this section look like an unrelated admin dashboard.
+
+==================================================
+11. GLOBAL / INTERNATIONAL POSITIONING
+==================================================
+
+The website should NOT look like an India-only design website.
+
+Use globally understandable design examples:
+
+- business promotion
+- restaurant
+- real estate
+- birthday
+- wedding
+- social media
+- event
+- sale
+- fitness
+- beauty
+- education
+
+India-specific templates can exist, but the main landing page must look globally relevant.
+
+Future markets include:
+
+United States
+Canada
+United Kingdom
+Australia
+Europe
+India
+and other international markets.
+
+Do not put country flags everywhere.
+
+==================================================
+12. PHOTO-DRIVEN DESIGN
+==================================================
+
+The current website lacks actual visual design imagery.
+
+Fix this aggressively.
+
+Use design previews throughout the page:
+
+Hero → design collage
+Categories → visual cards
+Templates → visual grid
+How it works → visual examples
+Editor → product screenshot
+Cyber Cafe → dashboard preview
+Final CTA → design collage
+
+The page should NEVER feel like a text-only SaaS landing page.
+
+Aim for approximately:
+
+40% text
+60% visual/product/design content
+
+Do not fill empty space just for aesthetics.
+
+==================================================
+13. IMAGE QUALITY RULES
+==================================================
+
+Use only relevant, professional imagery.
+
+For demo templates:
+
+- use appropriate stock/demo images
+- use copyright-safe/open-license or properly licensed assets
+- preferably use stable local/public assets so the website does not break if an external image URL disappears
+
+Do not use random unrelated photographs.
+
+Do not use sexualized imagery.
+
+Do not use recognizable celebrities or copyrighted characters.
+
+Do not make all templates use the same generic woman.
+
+Images should support the purpose of the design.
+
+==================================================
+14. DESIGN SYSTEM
+==================================================
+
+Create a consistent design system.
+
+Use:
+
+- premium but friendly typography
+- strong headings
+- readable body text
+- modern cards
+- subtle borders
+- controlled shadows
+- generous but not excessive spacing
+- clear CTA hierarchy
+- consistent corner radius
+- professional responsive grid
+
+Avoid:
+
+- excessive giant empty spaces
+- excessive animations
+- overly decorative typography
+- too many colors
+- random gradients everywhere
+- overly rounded childish UI
+- generic AI SaaS appearance
+
+The product should feel:
+
+Simple
+Creative
+Professional
+Trustworthy
+Modern
+
+==================================================
+15. MOBILE-FIRST REQUIREMENT
+==================================================
+
+The current screenshots are primarily mobile.
+
+Make mobile extremely strong.
+
+Test at:
+
+360px
+390px
+412px
+
+The hero should become:
+
+headline
+short explanation
+CTA
+visual design collage
+
+Do not simply stack the desktop layout vertically.
+
+Optimize the visual composition specifically for mobile.
+
+Template grids should remain visually attractive.
+
+No horizontal clipping.
+
+No text overflowing.
+
+No buttons cut off.
+
+No broken images.
+
+==================================================
+16. DESKTOP EXPERIENCE
+==================================================
+
+On desktop, use the available screen width properly.
+
+Hero:
+
+text on left
+large design showcase on right
+
+Template section:
+
+3–5 column responsive grid depending on viewport
+
+Product showcase:
+
+large editor preview
+
+Cyber Cafe:
+
+dashboard preview + explanation
+
+Avoid a narrow column surrounded by massive empty space.
+
+==================================================
+17. NAVIGATION
+==================================================
+
+Create a clean navigation:
+
+Logo / Brand
+
+Templates
+Create
+Features
+For Cyber Cafes
+Resources
+
+Right side:
+
+Log in
+Create a design
+
+On mobile:
+
+compact header
+menu drawer
+prominent Create button
+
+Do not use “Astra 6”.
+
+==================================================
+18. FREE GUEST EXPERIENCE
+==================================================
+
+Keep the existing guest-first experience.
+
+Users must be able to:
+
+Browse templates
+Choose a template
+Create a design
+Upload a photo
+Edit
+Preview
+Save locally
+
+without logging in.
+
+Do not add unnecessary login walls.
+
+Download will later require Google login according to the product architecture.
+
+Do not break the existing guest flow while redesigning the landing page.
+
+==================================================
+19. MONETIZATION VISIBILITY
+==================================================
+
+Do NOT make ads dominate the landing page.
+
+The future monetization model is:
+
+Free users → ads
+Pro users → ad-free
+
+Do not put intrusive ads in the hero.
+
+Keep reserved but tasteful ad placement architecture for future:
+
+HOME_TOP
+TEMPLATE_GALLERY
+EDITOR_BOTTOM
+DOWNLOAD_SCREEN
+BLOG_CONTENT
+SEO_PAGE
+
+Ads must never destroy the design creation experience.
+
+==================================================
+20. SEO + LANDING PAGE FOUNDATION
+==================================================
+
+Keep the landing page technically SEO-friendly.
+
+Implement/maintain:
+
+- semantic HTML
+- proper H1/H2 hierarchy
+- metadata
+- canonical URL
+- Open Graph
+- responsive layout
+- fast loading
+- image lazy loading
+- optimized image sizes
+- descriptive alt text
+- internal links
+
+The homepage should link naturally to:
+
+Birthday Poster Maker
+Wedding Invitation Maker
+Business Poster Maker
+Restaurant Menu Maker
+Social Media Post Maker
+Resume Maker
+Certificate Maker
+etc.
+
+These pages will later become the pSEO system.
+
+Do NOT create thousands of meaningless pages.
+
+==================================================
+21. INTERNAL LINKING
+==================================================
+
+The website must not have dead-end pages.
+
+Create useful internal journeys.
+
+Example:
+
+Birthday Poster
+→ Birthday Templates
+→ Birthday Invitation
+→ Birthday Card
+→ WhatsApp Birthday Status
+→ Instagram Birthday Post
+
+Business Poster
+→ Shop Advertisement
+→ Restaurant Offer
+→ Flyer Maker
+→ Business Card
+
+Every landing page should have:
+
+Related templates
+Related tools
+Related categories
+Create Design CTA
+
+==================================================
+22. BRANDING RULE
+==================================================
+
+Again:
+
+ASTRA 6 IS NOT THE PRODUCT NAME.
+
+It was only a design inspiration.
+
+Remove every accidental reference such as:
+
+Astra
+Astra 6
+Astra 6.0
+Astra Guest Studio
+
+from the visible product branding.
+
+Use the actual existing product/project brand.
+
+==================================================
+23. IMPORTANT: DO NOT BREAK CURRENT FUNCTIONALITY
+==================================================
+
+Before changing code:
+
+1. Inspect the existing application.
+2. Identify current working routes/components.
+3. Preserve the existing template system.
+4. Preserve the structured design JSON.
+5. Preserve the existing editor.
+6. Preserve PNG/JPG export.
+7. Preserve guest autosave/recovery.
+8. Preserve photo upload.
+9. Preserve background editing.
+10. Preserve undo/redo.
+
+This task is primarily a UI/UX + landing page redesign.
+
+Do not rewrite working functionality unnecessarily.
+
+==================================================
+24. FUTURE ARCHITECTURE MUST REMAIN COMPATIBLE
+==================================================
+
+Do not introduce AI APIs now.
+
+NO Gemini API.
+NO OpenAI API.
+NO image-generation API.
+
+Keep a future-ready abstraction for AI/design commands, but do not call an AI provider.
+
+Future AI will eventually be able to understand commands such as:
+
+“Make the name bigger.”
+“Move the photo left.”
+“Make it premium.”
+“Make a wedding version.”
+“Change this to Hindi.”
+
+For now these can only be implemented through deterministic structured editor operations where appropriate.
+
+==================================================
+25. FINAL QUALITY BAR
+==================================================
+
+Do not consider this task complete merely because the page looks different.
+
+Before finishing, verify:
+
+- no “Astra” branding
+- actual designs are visible above the fold
+- hero communicates the product immediately
+- templates look professional
+- no irrelevant/sexualized demo imagery
+- no broken images
+- no overflow
+- mobile looks excellent
+- desktop looks excellent
+- CTA buttons work
+- template links work
+- existing editor still works
+- guest flow still works
+- export still works
+- existing autosave still works
+- page loads quickly
+- images are optimized
+- accessibility basics are maintained
+
+The final result should look like a serious global design product, NOT a text-heavy portfolio/editorial website.
+
+Most importantly:
+
+WHEN SOMEONE OPENS THE HOMEPAGE, THEY SHOULD SEE BEAUTIFUL DESIGNS FIRST AND UNDERSTAND THE PRODUCT THROUGH VISUALS.
+
+Do not just improve typography.
+
+Actually DESIGN the landing page.
+
+Use the existing working product functionality underneath the new visual system.
+
+After completing the implementation, test the main user journey end-to-end.
+
+Finally, push all completed code changes to the connected GitHub repository so the latest working version is available there.
