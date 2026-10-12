@@ -3,19 +3,113 @@ import TemplateArtwork from "./TemplateArtwork.jsx";
 import { templates } from "../data/templates.js";
 
 const HISTORY_LIMIT = 30;
+const DRAFT_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+const TEXT_ELEMENTS = [
+  { id: "headline", x: 130, y: 535, width: 940, height: 220, fontFamily: "Georgia", fontSize: 106, fontWeight: 600, alignment: "left" },
+  { id: "subline", x: 132, y: 760, width: 900, height: 70, fontFamily: "Arial", fontSize: 36, fontWeight: 400, alignment: "left" },
+];
+
+function getElement(draft, id) {
+  return draft.elements.find((element) => element.id === id);
+}
+
+function getText(draft, id) {
+  return getElement(draft, id)?.text || "";
+}
+
+function getPhoto(draft) {
+  return getElement(draft, "photo")?.src || "";
+}
+
+function createDesignDocument(template, saved = {}) {
+  const savedElements = Array.isArray(saved.elements) ? saved.elements : [];
+  const background = saved.canvas?.background || saved.background || template.palette[0];
+  const savedText = (id) => savedElements.find((element) => element.id === id)?.text || saved[id] || template[id];
+  const savedPhoto = savedElements.find((element) => element.id === "photo")?.src || saved.photo || "";
+
+  return {
+    schemaVersion: 1,
+    templateId: template.id,
+    canvas: {
+      width: 1200,
+      height: 1500,
+      background,
+      ...(saved.canvas || {}),
+    },
+    elements: [
+      ...TEXT_ELEMENTS.map((defaults) => ({
+        ...defaults,
+        type: "text",
+        text: savedText(defaults.id),
+        color: template.palette[2],
+        locked: false,
+      })),
+      { id: "photo", type: "image", src: savedPhoto, x: 716, y: 226, width: 357, height: 549, locked: false },
+    ],
+    updatedAt: saved.updatedAt || Date.now(),
+  };
+}
+
+function cleanupExpiredDrafts() {
+  const now = Date.now();
+  for (let index = localStorage.length - 1; index >= 0; index -= 1) {
+    const key = localStorage.key(index);
+    if (!key?.startsWith("dzinewallah-draft-")) continue;
+    try {
+      const saved = JSON.parse(localStorage.getItem(key));
+      const expiry = saved.expiresAt || (saved.updatedAt ? saved.updatedAt + DRAFT_TTL_MS : null);
+      if (expiry && expiry < now) localStorage.removeItem(key);
+    } catch {
+      localStorage.removeItem(key);
+    }
+  }
+}
 
 function loadDraft(template) {
   try {
+    cleanupExpiredDrafts();
     const saved = localStorage.getItem(`dzinewallah-draft-${template.id}`);
-    return saved ? { ...JSON.parse(saved), templateId: template.id } : {
-      templateId: template.id,
-      headline: template.headline,
-      subline: template.subline,
-      background: template.palette[0],
-      photo: "",
-    };
+    const parsed = saved ? JSON.parse(saved) : {};
+    if (parsed.expiresAt && parsed.expiresAt < Date.now()) {
+      localStorage.removeItem(`dzinewallah-draft-${template.id}`);
+      return createDesignDocument(template);
+    }
+    return createDesignDocument(template, parsed);
   } catch {
-    return { templateId: template.id, headline: template.headline, subline: template.subline, background: template.palette[0], photo: "" };
+    return createDesignDocument(template);
+  }
+}
+
+function readAsDataUrl(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = () => reject(new Error("Image could not be read."));
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function compressPhoto(file) {
+  const imageUrl = URL.createObjectURL(file);
+  try {
+    const image = new Image();
+    image.src = imageUrl;
+    await new Promise((resolve, reject) => {
+      image.onload = resolve;
+      image.onerror = () => reject(new Error("Image could not be opened."));
+    });
+    const scale = Math.min(1, 1600 / Math.max(image.naturalWidth, image.naturalHeight));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+    canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+    const context = canvas.getContext("2d");
+    if (!context) throw new Error("Image processing is unavailable.");
+    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/webp", 0.84));
+    if (!blob) throw new Error("Image compression failed.");
+    return await readAsDataUrl(blob);
+  } finally {
+    URL.revokeObjectURL(imageUrl);
   }
 }
 
@@ -41,7 +135,12 @@ export default function Editor({ templateId, onBack }) {
   useEffect(() => {
     const timer = window.setTimeout(() => {
       try {
-        localStorage.setItem(`dzinewallah-draft-${template.id}`, JSON.stringify(draft));
+        const now = Date.now();
+        localStorage.setItem(`dzinewallah-draft-${template.id}`, JSON.stringify({
+          ...draft,
+          updatedAt: now,
+          expiresAt: now + DRAFT_TTL_MS,
+        }));
         setSavedAt("Saved on this device");
       } catch {
         setSavedAt("Autosave unavailable");
@@ -53,7 +152,18 @@ export default function Editor({ templateId, onBack }) {
   useEffect(() => () => window.clearTimeout(noticeTimer.current), []);
 
   const update = (key, value) => {
-    const next = { ...draft, [key]: value };
+    const now = Date.now();
+    const next = {
+      ...draft,
+      canvas: key === "background" ? { ...draft.canvas, background: value } : draft.canvas,
+      elements: draft.elements.map((element) => {
+        if (key === "headline" && element.id === "headline") return { ...element, text: value };
+        if (key === "subline" && element.id === "subline") return { ...element, text: value };
+        if (key === "photo" && element.id === "photo") return { ...element, src: value };
+        return element;
+      }),
+      updatedAt: now,
+    };
     setDraft(next);
     setHistory((current) => {
       const trimmed = current.slice(0, historyIndex + 1);
@@ -99,7 +209,7 @@ export default function Editor({ templateId, onBack }) {
       canvas.width = 1200;
       canvas.height = 1500;
       const context = canvas.getContext("2d");
-      context.fillStyle = draft.background;
+      context.fillStyle = draft.canvas.background;
       context.fillRect(0, 0, canvas.width, canvas.height);
       context.drawImage(image, 0, 0, canvas.width, canvas.height);
       URL.revokeObjectURL(url);
@@ -123,10 +233,10 @@ export default function Editor({ templateId, onBack }) {
     image.src = url;
   };
 
-  const onPhoto = (event) => {
+  const onPhoto = async (event) => {
     const file = event.target.files?.[0];
     if (!file) return;
-    if (!file.type.startsWith("image/")) {
+    if (!["image/png", "image/jpeg", "image/webp"].includes(file.type)) {
       showNotice("Choose a JPG, PNG, or WebP image.");
       event.target.value = "";
       return;
@@ -136,10 +246,13 @@ export default function Editor({ templateId, onBack }) {
       event.target.value = "";
       return;
     }
-    const reader = new FileReader();
-    reader.onload = () => update("photo", String(reader.result));
-    reader.onerror = () => showNotice("This image could not be opened.");
-    reader.readAsDataURL(file);
+    try {
+      update("photo", await compressPhoto(file));
+    } catch {
+      showNotice("This image could not be opened. Please try another.");
+    } finally {
+      event.target.value = "";
+    }
   };
 
   const clearPhoto = () => update("photo", "");
@@ -175,24 +288,24 @@ export default function Editor({ templateId, onBack }) {
           </div>
           <label className="editor-field">
             <span>Headline</span>
-            <textarea value={draft.headline} maxLength={54} rows={3} onChange={(event) => update("headline", event.target.value)} />
+            <textarea value={getText(draft, "headline")} maxLength={54} rows={3} onChange={(event) => update("headline", event.target.value)} />
           </label>
           <label className="editor-field">
             <span>Supporting text</span>
-            <input value={draft.subline} maxLength={80} onChange={(event) => update("subline", event.target.value)} />
+            <input value={getText(draft, "subline")} maxLength={80} onChange={(event) => update("subline", event.target.value)} />
           </label>
           <div className="editor-field">
             <span>Background color</span>
             <div className="editor-color-row">
-              <input aria-label="Choose background color" type="color" value={draft.background} onChange={(event) => update("background", event.target.value)} />
-              <code>{draft.background.toUpperCase()}</code>
+              <input aria-label="Choose background color" type="color" value={draft.canvas.background} onChange={(event) => update("background", event.target.value)} />
+              <code>{draft.canvas.background.toUpperCase()}</code>
               <button className="text-reset" onClick={() => update("background", template.palette[0])}>Reset</button>
             </div>
             <div className="editor-swatches">
               {template.palette.map((color) => (
                 <button
                   key={color}
-                  className={`editor-swatch${draft.background.toLowerCase() === color.toLowerCase() ? " active" : ""}`}
+                  className={`editor-swatch${draft.canvas.background.toLowerCase() === color.toLowerCase() ? " active" : ""}`}
                   style={{ "--swatch": color }}
                   onClick={() => update("background", color)}
                   aria-label={`Set background to ${color}`}
@@ -205,11 +318,11 @@ export default function Editor({ templateId, onBack }) {
             <label className="upload-photo">
               <input type="file" accept="image/png,image/jpeg,image/webp" onChange={onPhoto} />
               <span className="upload-photo-icon" aria-hidden="true">＋</span>
-              <span>{draft.photo ? "Replace your photo" : "Upload a photo"}</span>
+              <span>{getPhoto(draft) ? "Replace your photo" : "Upload a photo"}</span>
             </label>
-            {draft.photo && <button className="text-reset clear-photo" onClick={clearPhoto}>Remove photo</button>}
+            {getPhoto(draft) && <button className="text-reset clear-photo" onClick={clearPhoto}>Remove photo</button>}
           </div>
-          <div className="editor-hint"><span aria-hidden="true">✳</span> Your work saves automatically on this device.</div>
+          <div className="editor-hint"><span aria-hidden="true">✳</span> Drafts save in this browser and expire after 30 days.</div>
         </aside>
 
         <section className="editor-canvas-area" aria-label="Design canvas">
@@ -221,10 +334,10 @@ export default function Editor({ templateId, onBack }) {
             <div className="canvas-paper">
               <TemplateArtwork
                 template={template}
-                headline={draft.headline}
-                subline={draft.subline}
-                background={draft.background}
-                photo={draft.photo}
+                headline={getText(draft, "headline")}
+                subline={getText(draft, "subline")}
+                background={draft.canvas.background}
+                photo={getPhoto(draft)}
                 className="editor-artwork"
                 ref={svgRef}
               />
@@ -245,7 +358,7 @@ export default function Editor({ templateId, onBack }) {
               <div><span className="eyebrow">PREVIEW</span><h2>{template.name}</h2></div>
               <button className="icon-action" onClick={() => setPreview(false)} aria-label="Close preview">×</button>
             </div>
-            <TemplateArtwork template={template} headline={draft.headline} subline={draft.subline} background={draft.background} photo={draft.photo} className="preview-artwork" />
+            <TemplateArtwork template={template} headline={getText(draft, "headline")} subline={getText(draft, "subline")} background={draft.canvas.background} photo={getPhoto(draft)} className="preview-artwork" />
             <button className="editor-download-button preview-download" onClick={() => download("png")}>Download your design</button>
           </div>
         </div>

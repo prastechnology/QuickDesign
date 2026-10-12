@@ -6,16 +6,12 @@ const categories = ["All templates", "Birthday", "Business", "Wedding / Invitati
 const quickStarts = [
   { label: "Birthday", id: "birthday-bloom", tint: "peach" },
   { label: "Wedding", id: "wedding-olive", tint: "sage" },
-  { label: "Business ad", id: "business-studio", tint: "blue" },
+  { label: "Shop promotion", id: "business-sale", tint: "blue" },
   { label: "Restaurant", id: "business-coffee", tint: "tomato" },
   { label: "Festival", id: "festival-lights", tint: "gold" },
   { label: "Social post", id: "social-launch", tint: "lilac" },
   { label: "Real estate", id: "business-real-estate", tint: "sand" },
   { label: "Invitation", id: "invite-dinner", tint: "rose" },
-  { label: "Resume", id: "business-studio", tint: "blue" },
-  { label: "Certificate", id: "festival-harvest", tint: "gold" },
-  { label: "WhatsApp status", id: "social-sunday", tint: "sage" },
-  { label: "Instagram post", id: "social-menu", tint: "lilac" },
 ];
 
 function Arrow({ diagonal = false }) {
@@ -57,7 +53,7 @@ function MiniEditor({ template }) {
 
 function CafePreview({ templates }) {
   return (
-    <div className="dw-cafe-window" aria-label="Cyber cafe design workspace preview">
+    <div className="dw-cafe-window" aria-label="Concept preview of a future cyber cafe workspace">
       <div className="dw-cafe-sidebar">
         <div className="dw-cafe-mark"><i /> Dzinewallah</div>
         {["Overview", "Quick Create", "Customers", "Orders", "Print queue", "My designs"].map((item, index) =>
@@ -70,10 +66,10 @@ function CafePreview({ templates }) {
         <div className="dw-cafe-search">⌕ &nbsp; Find a template, customer or order</div>
         <div className="dw-cafe-label">POPULAR QUICK STARTS</div>
         <div className="dw-cafe-tiles">{[
-          ["Birthday poster", "birthday-bloom"], ["Wedding invite", "wedding-olive"], ["Resume", "business-studio"],
-          ["Certificate", "festival-harvest"], ["Shop advertisement", "business-sale"], ["Passport photo sheet", "social-sunday"],
+          ["Birthday poster", "birthday-bloom"], ["Wedding invite", "wedding-olive"], ["Shop promotion", "business-sale"],
+          ["Festival greeting", "festival-harvest"], ["Social post", "social-launch"], ["Cafe special", "business-coffee"],
         ].map(([label, id]) => <div className="dw-cafe-tile" key={label}><div className="dw-cafe-thumb"><TemplatePreview template={templates.find(template => template.id === id) || templates[0]} /></div><span>{label}</span><b>＋</b></div>)}</div>
-        <div className="dw-cafe-queue"><span><i /> Print queue</span><strong>3 designs ready</strong><span className="dw-queue-line" /></div>
+        <div className="dw-cafe-queue"><span><i /> Print queue</span><strong>Planned feature</strong><span className="dw-queue-line" /></div>
       </div>
     </div>
   );
@@ -117,11 +113,11 @@ export default function LandingPage({ templates, onCreate, onChooseTemplate }) {
       <section className="dw-hero" id="top">
         <div className="dw-hero-copy">
           <div className="dw-eyebrow"><span className="dw-eyebrow-line" /> GOOD DESIGN, MADE SIMPLE</div>
-          <h1>Designs without<br />the design <em>headache.</em></h1>
-          <p>Create posters, invitations, business ads, social posts and more — starting from professionally designed templates.</p>
-          <div className="dw-hero-actions"><button className="dw-button dw-button-primary" onClick={() => startCreate()}>Create a design <Arrow /></button><a className="dw-button dw-button-secondary" href="#templates">Browse templates <Arrow diagonal /></a></div>
-          <div className="dw-trust"><span className="dw-trust-mark">✳</span><span>No design skills. No complicated tools. <b>Start free.</b></span></div>
-          <div className="dw-proof"><div className="dw-proof-avatars"><i>R</i><i>M</i><i>A</i><i>J</i></div><span>For the ideas you want to bring to life.</span></div>
+          <h1>Design banana<br /><em>nahi aata?</em></h1>
+          <p>Bas batao kya banana hai — professional design ready.</p>
+          <div className="dw-hero-actions"><button className="dw-button dw-button-primary" onClick={() => startCreate()}>Create Your Design <Arrow /></button><button className="dw-button dw-button-secondary" onClick={() => startCreate()}>Try Without Login <Arrow diagonal /></button></div>
+          <div className="dw-trust"><span className="dw-trust-mark">✳</span><span>No design skills or complicated tools needed.</span></div>
+          <div className="dw-proof"><span>Made for Cyber Cafes, Print Shops, Small Businesses &amp; Everyone.</span></div>
         </div>
         <div className="dw-hero-art" aria-label="A collection of finished poster and social designs">
           <div className="dw-art-orbit dw-orbit-one" /><div className="dw-art-orbit dw-orbit-two" />
@@ -207,22 +203,32 @@ export default function LandingPage({ templates, onCreate, onChooseTemplate }) {
       </section>
 
       <section className="dw-cafe-section" id="cyber-cafes">
-        <div className="dw-cafe-content"><div className="dw-cafe-copy"><div className="dw-kicker">FOR THE PEOPLE BEHIND THE COUNTER</div><h2>Built for people who make designs for <em>everyone else.</em></h2><p>For cyber cafes, print shops and small design businesses. Get from “I need a poster” to a happy customer, without the complicated bits in between.</p>
-            <div className="dw-cafe-benefits"><div><span>↗</span><b>Quick starts</b><small>Common jobs, ready to go.</small></div><div><span>▤</span><b>Orders & print queue</b><small>Keep today's work in view.</small></div><div><span>♡</span><b>Made for real people</b><small>Help every customer feel at home.</small></div></div>
-            <a href="#create" className="dw-button dw-cafe-button">Explore Cyber Cafe Mode <Arrow /></a>
+        <div className="dw-cafe-content"><div className="dw-cafe-copy"><div className="dw-kicker">CYBER CAFE WORKSPACE · COMING SOON</div><h2>A simpler workspace for people who make designs for <em>everyone else.</em></h2><p>We’re shaping a focused workspace for cyber cafes, print shops and small design businesses. The guest editor works now; customer, order and print-queue tools are not connected yet.</p>
+            <div className="dw-cafe-benefits"><div><span>↗</span><b>Quick starts</b><small>Planned for frequent jobs.</small></div><div><span>▤</span><b>Orders & print queue</b><small>Planned workspace tools.</small></div><div><span>♡</span><b>Made for real people</b><small>Designed for everyday users.</small></div></div>
+            <span className="dw-button dw-cafe-button dw-coming-soon">Cyber Cafe Mode · Coming soon</span>
           </div><div className="dw-cafe-visual"><CafePreview templates={available} /><div className="dw-cafe-sticker">A good day<br /><b>starts here.</b> <span>✳</span></div></div>
         </div>
       </section>
 
       <section className="dw-final-cta" id="create">
         <div className="dw-final-art"><div className="dw-final-poster dw-final-one"><TemplatePreview template={templateFor("festival-lights")} /></div><div className="dw-final-poster dw-final-two"><TemplatePreview template={templateFor("business-sale")} /></div><div className="dw-final-poster dw-final-three"><TemplatePreview template={templateFor("social-menu")} /></div><div className="dw-final-orbit" /></div>
-        <div className="dw-final-copy"><div className="dw-kicker">GO ON, MAKE SOMETHING</div><h2>Your idea looks<br /><em>good already.</em></h2><p>Pick a design, add your details and see where it goes.</p><button className="dw-button dw-button-primary" onClick={() => startCreate()}>Create a design <Arrow /></button><span>No design experience needed. Really.</span></div>
+        <div className="dw-final-copy"><div className="dw-kicker">GO ON, MAKE SOMETHING</div><h2>Your idea looks<br /><em>good already.</em></h2><p>Pick a design, add your details and see where it goes.</p><button className="dw-button dw-button-primary" onClick={() => startCreate()}>Create Your Design <Arrow /></button><span>Drafts save on this device. Account sync is coming soon.</span></div>
+      </section>
+
+      <section className="dw-faq section-wrap" id="faq">
+        <div className="dw-faq-heading"><div className="dw-kicker">A FEW USEFUL DETAILS</div><h2>Good questions.</h2></div>
+        <div className="dw-faq-list">
+          <details><summary>Can I start designing without an account?</summary><p>Yes. Choose a template and edit it right away. Your draft is saved in this browser on this device.</p></details>
+          <details><summary>Can I download my design?</summary><p>Yes. The editor can export a PNG or JPG file. Google sign-in and permanent account saving are not connected in this preview.</p></details>
+          <details><summary>Can I reopen a design on another device?</summary><p>Not yet. Drafts currently stay in this browser; account-based cloud saving is still to be connected.</p></details>
+          <details><summary>Is Cyber Cafe Mode ready?</summary><p>Not yet. The cafe workspace shown above is a concept preview; customer, order and print-queue tools are coming later.</p></details>
+        </div>
       </section>
 
       <footer className="dw-footer">
         <a href="#top" className="dw-brand dw-footer-brand"><span className="dw-brand-mark"><i /><i /><i /></span><span>Dzinewallah</span></a>
         <p>A little help for the things you want to make.</p>
-        <div className="dw-footer-links"><a href="#templates">Templates</a><a href="#create">Create</a><a href="#features">How it works</a><a href="#cyber-cafes">For cyber cafes</a></div>
+        <div className="dw-footer-links"><a href="#templates">Templates</a><a href="#create">Create</a><a href="#features">How it works</a><a href="#cyber-cafes">For cyber cafes</a><a href="#faq">FAQ</a></div>
         <span className="dw-copyright">Made for making things. © 2026 Dzinewallah</span>
       </footer>
     </main>
