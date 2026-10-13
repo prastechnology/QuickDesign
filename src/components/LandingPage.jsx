@@ -1,9 +1,11 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { listSavedProjects } from "../design/localProjects.js";
 import TemplateArtwork from "./TemplateArtwork";
 import "./LandingPage.css";
 
 const categories = ["All templates", "Birthday", "Business", "Wedding / Invitation", "Festival", "Social Media"];
 const quickStarts = [
+  { label: "Blank canvas", id: "blank", tint: "sage" },
   { label: "Birthday", id: "birthday-bloom", tint: "peach" },
   { label: "Wedding", id: "wedding-olive", tint: "sage" },
   { label: "Shop promotion", id: "business-sale", tint: "blue" },
@@ -75,10 +77,14 @@ function CafePreview({ templates }) {
   );
 }
 
-export default function LandingPage({ templates, onCreate, onChooseTemplate }) {
+export default function LandingPage({ templates, onCreate, onCreateBlank, onChooseTemplate, onOpenProject }) {
   const [activeCategory, setActiveCategory] = useState("All templates");
   const [search, setSearch] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [savedProjects, setSavedProjects] = useState([]);
+  useEffect(() => {
+    setSavedProjects(listSavedProjects());
+  }, []);
   const available = useMemo(() => Array.isArray(templates) ? templates : [], [templates]);
   const templateFor = (id) => available.find((template) => template.id === id) || available[0];
   const visibleTemplates = useMemo(() => available.filter(template => {
@@ -93,7 +99,7 @@ export default function LandingPage({ templates, onCreate, onChooseTemplate }) {
     if (onChooseTemplate) onChooseTemplate(template);
     else if (onCreate) onCreate(template);
   };
-  const navItems = [["Templates", "#templates"], ["Create", ""], ["Features", "#features"], ["For Cyber Cafes", "#cyber-cafes"]];
+  const navItems = [["Templates", "#templates"], ["Create", ""], ["Features", "#features"], ["My designs", "#my-designs"], ["For Cyber Cafes", "#cyber-cafes"]];
   const menuClick = () => setMenuOpen(false);
 
   return (
@@ -134,14 +140,28 @@ export default function LandingPage({ templates, onCreate, onChooseTemplate }) {
 
       <section className="dw-quick section-wrap" id="quick-start">
         <div className="dw-section-top"><div><div className="dw-kicker">A GOOD PLACE TO BEGIN</div><h2>What are you making today?</h2></div><a href="#templates" className="dw-text-link">See all templates <Arrow /></a></div>
-        <div className="dw-quick-grid">
+          <div className="dw-quick-grid">
           {quickStarts.map((item, index) => {
-            const template = templateFor(item.id) || available[index];
+            const template = item.id === "blank" ? { id: "blank", name: "Blank canvas" } : (templateFor(item.id) || available[index]);
             return <button type="button" className={`dw-quick-card tint-${item.tint}`} key={`${item.label}-${index}`} onClick={() => chooseTemplate(template)}>
-              <span className="dw-quick-thumb"><TemplatePreview template={template} /></span><span className="dw-quick-label">{item.label}<i><Arrow diagonal /></i></span>
+              <span className={`dw-quick-thumb${item.id === "blank" ? " dw-blank-thumb" : ""}`}>{item.id === "blank" ? <span aria-hidden="true">＋</span> : <TemplatePreview template={template} />}</span><span className="dw-quick-label">{item.label}<i><Arrow diagonal /></i></span>
             </button>;
           })}
         </div>
+      </section>
+
+      <section className="dw-recent section-wrap" id="my-designs">
+        <div className="dw-section-top"><div><div className="dw-kicker">YOUR WORK, ON THIS DEVICE</div><h2>Pick up where you left off.</h2></div><button type="button" className="dw-text-link" onClick={() => startCreate()}>New design <Arrow /></button></div>
+        {savedProjects.length ? <div className="dw-recent-list">
+          {savedProjects.slice(0, 6).map((project) => {
+            const projectTemplate = available.find((item) => item.id === project.templateId);
+            return <button type="button" className="dw-recent-card" key={project.id} onClick={() => onOpenProject?.(project)}>
+              <span className="dw-recent-thumb">{projectTemplate ? <TemplatePreview template={projectTemplate} /> : <span>＋</span>}</span>
+              <span className="dw-recent-info"><b>{project.title || "Untitled design"}</b><small>Saved here · {new Date(project.updatedAt).toLocaleDateString()}</small></span>
+              <span className="dw-recent-open"><Arrow /></span>
+            </button>;
+          })}
+        </div> : <div className="dw-recent-empty"><span>Designs you create here will appear on this device.</span><button type="button" onClick={() => onCreateBlank?.()}>Start with a blank canvas <Arrow /></button></div>}
       </section>
 
       <section className="dw-template-section" id="templates">

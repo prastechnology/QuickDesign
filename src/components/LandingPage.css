@@ -188,6 +188,21 @@
 .dw-cafe-benefits>div>span {font-size:16px;color:var(--orange)}.dw-cafe-benefits b{font-size:9px}.dw-cafe-benefits small{font-size:8px;line-height:1.5;color:#738078}
 .dw-cafe-button {background:var(--green);color:white!important}
 .dw-coming-soon {cursor:default;opacity:.78}
+.dw-recent {padding-top:70px;padding-bottom:75px}
+.dw-recent-list {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:28px}
+.dw-recent-card {display:grid;grid-template-columns:48px minmax(0,1fr) 24px;align-items:center;gap:12px;padding:11px;border:1px solid #e2e6df;border-radius:13px;background:#fff;text-align:left;cursor:pointer;color:var(--ink)}
+.dw-recent-card:hover {border-color:#b8c9b9;transform:translateY(-2px)}
+.dw-recent-thumb {display:grid;place-items:center;width:44px;height:54px;overflow:hidden;border-radius:4px;background:#f4eee4}
+.dw-recent-thumb .template-artwork,.dw-recent-thumb svg {width:100%;height:100%}
+.dw-recent-thumb>span {font-size:20px;color:var(--green)}
+.dw-recent-info {min-width:0}
+.dw-recent-info b,.dw-recent-info small {display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dw-recent-info b {font-size:11px;font-weight:600}
+.dw-recent-info small {margin-top:5px;color:#78837b;font-size:9px}
+.dw-recent-open {color:var(--green)}
+.dw-recent-empty {display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:22px;padding:17px 20px;border:1px dashed #cbd5cb;border-radius:12px;color:#758078;font-size:11px}
+.dw-recent-empty button {display:inline-flex;align-items:center;gap:6px;border:0;background:transparent;color:var(--green);font-weight:600;cursor:pointer}
+.dw-blank-thumb {display:grid;place-items:center;background:#f2f5ef!important;color:var(--green);font-size:23px}
 .dw-faq {display:grid;grid-template-columns:.7fr 1.3fr;gap:10%;padding-top:100px;padding-bottom:100px}
 .dw-faq-heading h2 {font-size:clamp(34px,4vw,56px);line-height:1.05;letter-spacing:-.055em;margin:13px 0}
 .dw-faq-list {border-top:1px solid #d9ddd5}
@@ -355,6 +370,8 @@
   .dw-final-cta{padding:45px 20px 50px;display:flex;flex-direction:column-reverse;gap:18px;align-items:stretch}
   .dw-faq {display:block;padding-top:65px;padding-bottom:65px}
   .dw-faq-list {margin-top:25px}
+  .dw-recent-list {grid-template-columns:1fr}
+  .dw-recent-empty {align-items:flex-start;flex-direction:column}
   .dw-final-copy{padding:0}.dw-final-copy h2{font-size:47px}.dw-final-copy>p{font-size:11px}
   .dw-final-art{height:245px}.dw-final-poster{width:114px;height:170px}.dw-final-one{left:15%;top:25%}.dw-final-two{left:39%;top:8%;width:125px;height:190px}.dw-final-three{right:12%;top:26%}.dw-final-orbit{width:350px;height:205px}
   .dw-footer{padding:20px;display:grid;grid-template-columns:1fr auto;gap:13px}

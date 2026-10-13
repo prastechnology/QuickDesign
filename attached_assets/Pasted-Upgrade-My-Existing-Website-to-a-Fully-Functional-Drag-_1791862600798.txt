@@ -1,0 +1,105 @@
+Upgrade My Existing Website to a Fully Functional Drag-and-Drop Design Editor
+
+Modify my existing website directly. Do not just suggest features, create mockups, or build a separate demo. Implement a real, working, layer-based graphic design editor.
+
+1. Replace the Current Restricted Editor
+
+The current editor is too limited. It mainly allows users to change predefined text, subtitles, and upload a photo. Remove this restricted editing approach and replace it with a genuine drag-and-drop canvas.
+
+When a user clicks any template, open that exact template in the editor with all its elements individually editable.
+
+2. Make Every Element Editable
+
+Users must be able to click, select, move, resize, rotate, duplicate, delete, and rearrange individual elements, including:
+
+- Every text heading, subtitle, paragraph, and text element.
+- Every image, photo, background graphic, and decorative illustration.
+- Shapes, lines, borders, icons, stickers, and other design elements.
+
+Do not limit users to predefined text and photo fields. They must be able to modify the entire composition according to their needs.
+
+3. Implement Real Drag-and-Drop
+
+Implement actual canvas interactions, not visual-only controls.
+
+- Drag any selected element freely across the canvas.
+- Resize using corner and edge handles.
+- Rotate elements using rotation handles.
+- Add new text boxes anywhere.
+- Upload and insert multiple images independently.
+- Crop, reposition, resize, and rotate images.
+- Add shapes, lines, icons, stickers, and decorative elements.
+- Change fonts, font sizes, colors, alignment, spacing, opacity, borders, and shadows where supported.
+- Change background colors, gradients, and background images independently.
+- Bring elements forward, send them backward, and reorder them through a working layers panel.
+- Lock, unlock, hide, show, duplicate, and delete individual layers.
+- Support multi-selection, grouping, alignment guides, snapping, undo, redo, zoom, and pan where practical.
+
+Every action must update the actual design model and be reflected in the canvas and final exported image.
+
+4. Build a Proper Editor Interface
+
+Desktop layout:
+
+- Left panel: templates, text, uploads, shapes, icons, stickers, and assets.
+- Center: interactive design canvas.
+- Top toolbar: undo, redo, zoom, canvas size, preview, save, and download.
+- Right panel: contextual properties and layers.
+
+When users select an element, display the relevant editing controls. When they select text, show typography controls; when they select an image, show image controls.
+
+On mobile, provide a touch-friendly canvas and compact bottom or side tool panels. Ensure drag, resize, rotate, and selection work with touch gestures.
+
+5. Editable Template Architecture
+
+Store templates as structured design documents containing independent elements and their properties, including type, position, dimensions, rotation, text, fonts, colors, asset references, and stacking order.
+
+A flattened image may be used as a thumbnail or preview, but never as the only editable content of a template.
+
+Convert the existing templates into genuine layered templates wherever possible. If any template is currently a flattened image, recreate its editable structure or clearly identify which parts cannot be separated automatically. Do not pretend a flattened image has independently editable elements.
+
+Add a blank-canvas option so users can start from scratch.
+
+Selecting and editing a template must create a separate user project. Never modify or overwrite the original template.
+
+6. Real Saving and Export
+
+Implement and test:
+
+- Automatic saving and project recovery.
+- Reopening a saved design with its layers intact.
+- Undo and redo for editing operations.
+- PNG and JPG exports that accurately match the canvas.
+- Correct canvas dimensions and element positioning.
+- Reliable handling of uploaded images and fonts.
+
+Preserve existing guest editing and local autosave functionality. Do not introduce a login requirement for ordinary design creation if the existing website supports guest editing.
+
+7. Preserve the Existing Website
+
+Inspect the current codebase before making changes. Reuse and improve the existing project structure, template data, canvas rendering, and export logic rather than creating a disconnected editor.
+
+Keep the existing product brand, landing page, navigation, and other working features. Do not rename the product to Astra 6; that name was only design inspiration.
+
+Do not add AI APIs, payment systems, or subscriptions in this task.
+
+8. Mandatory Testing and Completion
+
+Test the actual user journey:
+
+1. Open the template gallery.
+2. Click a template.
+3. Open it in the editor.
+4. Select and move existing text and graphics.
+5. Resize and rotate elements.
+6. Add and edit multiple text boxes and images.
+7. Change backgrounds and shapes.
+8. Reorder and delete layers.
+9. Undo and redo changes.
+10. Save, refresh, and reopen the project.
+11. Export PNG and JPG and verify that the output matches the canvas.
+12. Repeat essential interactions on mobile.
+
+Fix errors and broken interactions before declaring the task complete. Do not leave non-functional buttons, fake controls, or a form-based editor disguised as a drag-and-drop editor.
+
+Finally, run the application, verify the working changes, and push the completed code to my connected GitHub repository. Report what was implemented, what was tested, and any limitations that remain.
